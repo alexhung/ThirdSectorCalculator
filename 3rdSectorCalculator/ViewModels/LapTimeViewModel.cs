@@ -57,5 +57,10 @@ namespace ThirdSectorCalculator.ViewModels
         {
             return string.Format("{0}:{1}.{2}", Minute, Seconds, Milliseconds);
         }
+
+        public int ToMilliseconds()
+        {
+            return (Minute * 60 * 1000) + (Seconds * 1000) + Milliseconds;
+        }
     }
 }

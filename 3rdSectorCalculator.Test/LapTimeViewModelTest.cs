@@ -66,5 +66,13 @@ namespace ThirdSectorCalculator.Test
 
             Assert.That(() => lapTimeViewModel.Milliseconds = -1, Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Milliseconds must be between 0 and 999"));
         }
+
+        [Test]
+        public void ShouldConvertToMilliseconds()
+        {
+            var lapTimeViewModel = new LapTimeViewModel {Minute = 1, Seconds = 45, Milliseconds = 555};
+            
+            Assert.That(lapTimeViewModel.ToMilliseconds(), Is.EqualTo(105555));
+        }
     }
 }
