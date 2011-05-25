@@ -55,5 +55,13 @@ namespace ThirdSectorCalculator.Test
 
             Assert.That(viewModel.ToMilliseconds(), Is.EqualTo(45555));
         }
+
+        [Test]
+        public void ShouldConvertToString()
+        {
+            var viewModel = new SectorTimeViewModel { Seconds = 45, Milliseconds = 555 };
+
+            Assert.That(viewModel.ToString(), Is.EqualTo("45.555"));
+        }
     }
 }
