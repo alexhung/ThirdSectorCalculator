@@ -7,6 +7,7 @@ namespace ThirdSectorCalculator
 {
     public partial class MainPage : PhoneApplicationPage
     {
+        private PhoneApplicationPage _nextPage;
         public MainViewModel MainViewModel { get; set; }
 
         public MainPage()
@@ -30,10 +31,28 @@ namespace ThirdSectorCalculator
 
         private void sectorTextBox_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/SectorTimeInputPage.xaml", UriKind.Relative));
+            var sector = sender == sector1TextBox ? 1 : 2;
+            NavigationService.Navigate(new Uri(string.Format("/SectorTimeInputPage.xaml?sector={0}", sector), UriKind.Relative));
 
             e.Complete();
             e.Handled = true;
+        }
+
+        protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            _nextPage = e.Content as PhoneApplicationPage;
+
+            base.OnNavigatedFrom(e);
+        }
+
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
+        {
+            if (_nextPage != null && _nextPage is SectorTimeInputPage)
+            {
+                var sectorTimeInputPage = _nextPage as SectorTimeInputPage;
+            }
+
+            base.OnNavigatedTo(e);
         }
     }
 }
