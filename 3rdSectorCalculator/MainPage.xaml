@@ -18,15 +18,15 @@
         <!--Pivot Control-->
         <controls:Pivot Title="3rd Sector Calculator">
             <!--Pivot item one-->
-            <controls:PivotItem Header="sectors">
+            <controls:PivotItem Header="sectors" DataContext="MainViewModel" ManipulationStarted="laptimeTextBox_ManipulationStarted">
                 <!--Double line list with text wrapping-->
                 <Canvas>
                     <TextBlock Canvas.Left="13" Canvas.Top="14" Height="30" Name="textBlock1" Text="lap time" />
-                    <TextBox Canvas.Left="0" Canvas.Top="50" Height="133" Name="laptimeTextBox" Text="1:88:888" Width="457" FontSize="72" TextAlignment="Center" />
+                    <TextBox Canvas.Left="0" Canvas.Top="50" Height="133" Name="laptimeTextBox" Text="1:88:888" Width="457" FontSize="72" TextAlignment="Center" ManipulationStarted="laptimeTextBox_ManipulationStarted" />
                     <TextBlock Canvas.Left="13" Canvas.Top="191" Height="30" Name="textBlock3" Text="sector 1" />
-                    <TextBox Canvas.Left="0" Canvas.Top="227" Height="89" Name="sector1TextBox" Text="59:888" Width="457" FontSize="36" />
+                    <TextBox Canvas.Left="0" Canvas.Top="227" Height="89" Name="sector1TextBox" Text="59:888" Width="457" FontSize="36" ManipulationStarted="sectorTextBox_ManipulationStarted" />
                     <TextBlock Canvas.Left="14" Canvas.Top="324" Height="30" Name="textBlock2" Text="sector 2" />
-                    <TextBox Canvas.Left="1" Canvas.Top="360" FontSize="36" Height="89" Name="sector2TextBox" Text="59:888" Width="457" />
+                    <TextBox Canvas.Left="1" Canvas.Top="360" FontSize="36" Height="89" Name="sector2TextBox" Text="59:888" Width="457" ManipulationStarted="sectorTextBox_ManipulationStarted" />
                     <TextBlock Canvas.Left="14" Canvas.Top="457" Height="30" Name="textBlock4" Text="sector 3" />
                     <TextBox Canvas.Left="1" Canvas.Top="493" FontSize="36" Height="89" Name="sector3TextBox" Text="59:888" Width="457" IsEnabled="False" Foreground="Black" />
                 </Canvas>
