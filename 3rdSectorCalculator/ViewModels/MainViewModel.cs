@@ -5,9 +5,45 @@ namespace ThirdSectorCalculator.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        public LapTimeViewModel LapTime { get; set; }
-        public SectorTimeViewModel FirstSector { get; set; }
-        public SectorTimeViewModel SecondSector { get; set; }
+        private LapTimeViewModel _lapTime;
+        public LapTimeViewModel LapTime
+        {
+            get { return _lapTime; }
+            set
+            {
+                if (_lapTime != value)
+                    NotifyPropertyChanged("LapTimeViewModel");
+
+                _lapTime = value;
+            }
+        }
+
+        private SectorTimeViewModel _firstSector;
+        public SectorTimeViewModel FirstSector
+        {
+            get { return _firstSector; }
+            set
+            {
+                if (_firstSector != value)
+                    NotifyPropertyChanged("FirstSector");
+
+                _firstSector = value;
+            }
+        }
+
+        private SectorTimeViewModel _secondSector;
+        public SectorTimeViewModel SecondSector
+        {
+            get { return _secondSector; }
+            set
+            {
+                if (_secondSector != value)
+                    NotifyPropertyChanged("SecondSector");
+
+                _secondSector = value;
+            }
+        }
+
         public SectorTimeViewModel ThirdSector
         {
             get

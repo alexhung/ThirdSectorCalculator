@@ -4,6 +4,13 @@ namespace ThirdSectorCalculator.ViewModels
 {
     public class LapTimeViewModel
     {
+        public LapTimeViewModel()
+        {
+            Minute = 0;
+            Seconds = 0;
+            Milliseconds = 0;
+        }
+
         private int _minute;
         public int Minute
         {

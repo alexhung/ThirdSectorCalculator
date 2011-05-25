@@ -5,7 +5,10 @@ namespace ThirdSectorCalculator.ViewModels
     public class SectorTimeViewModel
     {
         public SectorTimeViewModel()
-        {}
+        {
+            Seconds = 0;
+            Milliseconds = 0;
+        }
 
         public SectorTimeViewModel(int milliseconds)
         {
