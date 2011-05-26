@@ -57,8 +57,17 @@ namespace ThirdSectorCalculator
             var queryString = NavigationContext.QueryString;
             if (queryString.ContainsKey("sector"))
             {
-                Sector = Int32.Parse(queryString["sector"]);
+                Sector = int.Parse(queryString["sector"]);
                 PageTitle.Text = string.Format("Enter sector {0} time", Sector);
+            }
+
+            if (queryString.ContainsKey("time"))
+            {
+                ViewModel = new SectorTimeViewModel(int.Parse(queryString["time"]));
+                SecondList.SelectedIndex = ViewModel.Seconds - 1;
+                MillisecondList1.SelectedIndex = (ViewModel.Milliseconds/100) - 1;
+                MillisecondList2.SelectedIndex = ((ViewModel.Milliseconds%100)/10) - 1;
+                MillisecondList3.SelectedIndex = (ViewModel.Milliseconds%10) - 1;
             }
 
             base.OnNavigatedTo(e);
