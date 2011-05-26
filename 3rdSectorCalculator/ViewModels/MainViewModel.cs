@@ -49,7 +49,7 @@ namespace ThirdSectorCalculator.ViewModels
             get
             {
                 var thirdSectorInMilliseconds = LapTime.ToMilliseconds() - (FirstSector.ToMilliseconds() + SecondSector.ToMilliseconds());
-                return new SectorTimeViewModel(thirdSectorInMilliseconds);
+                return thirdSectorInMilliseconds >= 60000 ? new SectorTimeViewModel(0) : new SectorTimeViewModel(thirdSectorInMilliseconds);
             }
         }
 

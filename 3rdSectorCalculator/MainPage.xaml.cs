@@ -71,10 +71,12 @@ namespace ThirdSectorCalculator
                 {
                     case 1:
                         sectorTextBox = sector1TextBox;
+                        MainViewModel.FirstSector = sectorTimeInputPage.ViewModel;
                         break;
 
                     case 2:
                         sectorTextBox = sector2TextBox;
+                        MainViewModel.SecondSector = sectorTimeInputPage.ViewModel;
                         break;
                 }
 
@@ -88,9 +90,12 @@ namespace ThirdSectorCalculator
             if (_nextPage != null && _nextPage is LapTimeInputPage)
             {
                 var lapTimeInputPage = _nextPage as LapTimeInputPage;
-                laptimeTextBox.Text = lapTimeInputPage.ViewModel.ToString();
-                laptimeTextBox.Tag = lapTimeInputPage.ViewModel.ToMilliseconds();
+                MainViewModel.LapTime = lapTimeInputPage.ViewModel;
+                laptimeTextBox.Text = MainViewModel.LapTime.ToString();
+                laptimeTextBox.Tag = MainViewModel.LapTime.ToMilliseconds();
             }
+
+            sector3TextBox.Text = MainViewModel.ThirdSector.ToString();
 
             base.OnNavigatedTo(e);
         }

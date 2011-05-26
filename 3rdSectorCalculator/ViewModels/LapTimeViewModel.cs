@@ -6,16 +6,16 @@ namespace ThirdSectorCalculator.ViewModels
     {
         public LapTimeViewModel()
         {
-            Minute = 1;
+            Minute = 0;
             Seconds = 0;
             Milliseconds = 0;
         }
 
         public LapTimeViewModel(int milliseconds)
         {
-            Minute = milliseconds / 60000;
-            Seconds = Math.Abs((milliseconds - 60000) / 1000);
-            Milliseconds = milliseconds % 1000;
+            Minute = milliseconds == 0 ? 0 : milliseconds / 60000;
+            Seconds = milliseconds == 0 ? 0 : Math.Abs((milliseconds - 60000) / 1000);
+            Milliseconds = milliseconds == 0 ? 0 : milliseconds % 1000;
         }
 
         private int _minute;
@@ -24,7 +24,7 @@ namespace ThirdSectorCalculator.ViewModels
             get { return _minute; }
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     throw new ArgumentException("Minute must be larger than 0");
                 }

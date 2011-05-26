@@ -21,10 +21,10 @@ namespace ThirdSectorCalculator
 
         private void InitializeLoopingLists()
         {
-            InitializeLoopingList(SecondList, 59);
-            InitializeLoopingList(MillisecondList1, 9);
-            InitializeLoopingList(MillisecondList2, 9);
-            InitializeLoopingList(MillisecondList3, 9);
+            InitializeLoopingList(SecondList, 60);
+            InitializeLoopingList(MillisecondList1, 10);
+            InitializeLoopingList(MillisecondList2, 10);
+            InitializeLoopingList(MillisecondList3, 10);
         }
 
         private static void InitializeLoopingList(RadLoopingList millisecondList, int listSize)
@@ -32,11 +32,11 @@ namespace ThirdSectorCalculator
             var millisecondsListSource = new LoopingListDataSource(listSize);
             millisecondsListSource.ItemNeeded += (sender, args) =>
             {
-                args.Item = new LoopingListDataItem(string.Format("{0}", args.Index + 1));
+                args.Item = new LoopingListDataItem(string.Format("{0}", args.Index));
             };
             millisecondsListSource.ItemUpdated += (sender, args) =>
             {
-                args.Item.Text = string.Format("{0}", args.Index + 1);
+                args.Item.Text = string.Format("{0}", args.Index);
             };
             millisecondList.DataSource = millisecondsListSource;
         }
@@ -53,10 +53,10 @@ namespace ThirdSectorCalculator
             if (queryString.ContainsKey("time"))
             {
                 ViewModel = new SectorTimeViewModel(int.Parse(queryString["time"]));
-                SecondList.SelectedIndex = ViewModel.Seconds - 1;
-                MillisecondList1.SelectedIndex = (ViewModel.Milliseconds/100) - 1;
-                MillisecondList2.SelectedIndex = ((ViewModel.Milliseconds%100)/10) - 1;
-                MillisecondList3.SelectedIndex = (ViewModel.Milliseconds%10) - 1;
+                SecondList.SelectedIndex = ViewModel.Seconds;
+                MillisecondList1.SelectedIndex = (ViewModel.Milliseconds/100);
+                MillisecondList2.SelectedIndex = ((ViewModel.Milliseconds%100)/10);
+                MillisecondList3.SelectedIndex = (ViewModel.Milliseconds%10);
             }
 
             base.OnNavigatedTo(e);
@@ -64,10 +64,10 @@ namespace ThirdSectorCalculator
 
         private void SectorTimeInputPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            ViewModel.Seconds = SecondList.SelectedIndex + 1;
-            ViewModel.Milliseconds = ((MillisecondList1.SelectedIndex + 1)*100) +
-                                     ((MillisecondList2.SelectedIndex + 1)*10) +
-                                     (MillisecondList3.SelectedIndex + 1);
+            ViewModel.Seconds = SecondList.SelectedIndex;
+            ViewModel.Milliseconds = ((MillisecondList1.SelectedIndex)*100) +
+                                     ((MillisecondList2.SelectedIndex)*10) +
+                                     (MillisecondList3.SelectedIndex);
         }
     }
 }
