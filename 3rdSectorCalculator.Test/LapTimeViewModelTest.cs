@@ -8,9 +8,19 @@ namespace ThirdSectorCalculator.Test
     public class LapTimeViewModelTest
     {
         [Test]
+        public void ShouldConstructFromMilliseconds()
+        {
+            var viewModel = new LapTimeViewModel(105123);
+
+            Assert.That(viewModel.Minute, Is.EqualTo(1));
+            Assert.That(viewModel.Seconds, Is.EqualTo(45));
+            Assert.That(viewModel.Milliseconds, Is.EqualTo(123));
+        }
+
+        [Test]
         public void ShouldSetLapTime()
         {
-            var lapTimeViewModel = new LapTimeViewModel{ Minute = 1, Seconds = 55, Milliseconds = 444};
+            var lapTimeViewModel = new LapTimeViewModel { Minute = 1, Seconds = 55, Milliseconds = 444};
 
             Assert.That(lapTimeViewModel.Minute, Is.EqualTo(1));
             Assert.That(lapTimeViewModel.Seconds, Is.EqualTo(55));
@@ -21,7 +31,7 @@ namespace ThirdSectorCalculator.Test
         [Test]
         public void ShouldNotAllowMinuteLargerThanTwo()
         {
-            var lapTimeViewModel = new LapTimeViewModel{ Minute = 2 };
+            var lapTimeViewModel = new LapTimeViewModel { Minute = 2 };
 
             Assert.That(() => lapTimeViewModel.Minute = 3, Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Minute cannot be larger than 2"));
         }
@@ -46,7 +56,7 @@ namespace ThirdSectorCalculator.Test
         [Test]
         public void ShouldNotAllowMinusSeconds()
         {
-            var lapTimeViewModel = new LapTimeViewModel{ Seconds = 0 };
+            var lapTimeViewModel = new LapTimeViewModel { Seconds = 0 };
 
             Assert.That(() => lapTimeViewModel.Seconds = -1, Throws.TypeOf<ArgumentException>().With.Message.EqualTo("Seconds must be between 0 and 59"));
         }

@@ -14,14 +14,14 @@ namespace ThirdSectorCalculator
         public MainPage()
         {
             InitializeComponent();
-            
-            sector1TextBox.Tag = 0;
-            sector2TextBox.Tag = 0;
+
+            MainViewModel = new MainViewModel();
+            laptimeTextBox.Tag = MainViewModel.LapTime.ToMilliseconds();
+            sector1TextBox.Tag = MainViewModel.FirstSector.ToMilliseconds();
+            sector2TextBox.Tag = MainViewModel.SecondSector.ToMilliseconds();
             sector3TextBox.Tag = 0;
 
             Loaded += MainPage_Loaded;
-
-            MainViewModel = new MainViewModel();
         }
 
         // Load data for the ViewModel Items
@@ -31,7 +31,10 @@ namespace ThirdSectorCalculator
 
         private void laptimeTextBox_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
         {
+            NavigationService.Navigate(new Uri(string.Format("/LapTimeInputPage.xaml?time={0}", laptimeTextBox.Tag), UriKind.Relative));
 
+            e.Complete();
+            e.Handled = true;
         }
 
         private void sectorTextBox_ManipulationStarted(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
@@ -80,6 +83,13 @@ namespace ThirdSectorCalculator
                     sectorTextBox.Text = sectorTimeInputPage.ViewModel.ToString();
                     sectorTextBox.Tag = sectorTimeInputPage.ViewModel.ToMilliseconds();
                 }
+            }
+
+            if (_nextPage != null && _nextPage is LapTimeInputPage)
+            {
+                var lapTimeInputPage = _nextPage as LapTimeInputPage;
+                laptimeTextBox.Text = lapTimeInputPage.ViewModel.ToString();
+                laptimeTextBox.Tag = lapTimeInputPage.ViewModel.ToMilliseconds();
             }
 
             base.OnNavigatedTo(e);

@@ -11,6 +11,13 @@ namespace ThirdSectorCalculator.ViewModels
             Milliseconds = 0;
         }
 
+        public LapTimeViewModel(int milliseconds)
+        {
+            Minute = milliseconds / 60000;
+            Seconds = Math.Abs((milliseconds - 60000) / 1000);
+            Milliseconds = milliseconds % 1000;
+        }
+
         private int _minute;
         public int Minute
         {

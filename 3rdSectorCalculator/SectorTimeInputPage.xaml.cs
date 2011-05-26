@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Phone.Controls;
+﻿using Microsoft.Phone.Controls;
 using Telerik.Windows.Controls;
 using ThirdSectorCalculator.ViewModels;
 
@@ -22,33 +21,23 @@ namespace ThirdSectorCalculator
 
         private void InitializeLoopingLists()
         {
-            var secondsListSource = new LoopingListDataSource(60);
-            secondsListSource.ItemNeeded += (sender, args) =>
-                                                {
-                                                    args.Item = new LoopingListDataItem(string.Format("{0}", args.Index + 1));
-                                                };
-            secondsListSource.ItemUpdated += (sender, args) =>
-                                                 {
-                                                     args.Item.Text = string.Format("{0}", args.Index + 1);
-                                                 };
-            SecondList.DataSource = secondsListSource;
-
-            InitializeMillisecondLoopingList(MillisecondList1);
-            InitializeMillisecondLoopingList(MillisecondList2);
-            InitializeMillisecondLoopingList(MillisecondList3);
+            InitializeLoopingList(SecondList, 59);
+            InitializeLoopingList(MillisecondList1, 9);
+            InitializeLoopingList(MillisecondList2, 9);
+            InitializeLoopingList(MillisecondList3, 9);
         }
 
-        private static void InitializeMillisecondLoopingList(RadLoopingList millisecondList)
+        private static void InitializeLoopingList(RadLoopingList millisecondList, int listSize)
         {
-            var millisecondsListSource = new LoopingListDataSource(9);
+            var millisecondsListSource = new LoopingListDataSource(listSize);
             millisecondsListSource.ItemNeeded += (sender, args) =>
-                                                     {
-                                                         args.Item = new LoopingListDataItem(string.Format("{0}", args.Index + 1));
-                                                     };
+            {
+                args.Item = new LoopingListDataItem(string.Format("{0}", args.Index + 1));
+            };
             millisecondsListSource.ItemUpdated += (sender, args) =>
-                                                      {
-                                                          args.Item.Text = string.Format("{0}", args.Index + 1);
-                                                      };
+            {
+                args.Item.Text = string.Format("{0}", args.Index + 1);
+            };
             millisecondList.DataSource = millisecondsListSource;
         }
 
@@ -73,7 +62,7 @@ namespace ThirdSectorCalculator
             base.OnNavigatedTo(e);
         }
 
-        void SectorTimeInputPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
+        private void SectorTimeInputPage_BackKeyPress(object sender, System.ComponentModel.CancelEventArgs e)
         {
             ViewModel.Seconds = SecondList.SelectedIndex + 1;
             ViewModel.Milliseconds = ((MillisecondList1.SelectedIndex + 1)*100) +
